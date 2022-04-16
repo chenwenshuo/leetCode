@@ -34,6 +34,9 @@ import java.util.List;
 public class RemoveDuplicatesFromSortedListIi{
          public static void main(String[] args) {
             Solution solution = new RemoveDuplicatesFromSortedListIi().new Solution();
+            int a=123;
+            int b=456;
+             System.out.println(a&b);
  }
 
 //leetcode submit region begin(Prohibit modification and deletion)
