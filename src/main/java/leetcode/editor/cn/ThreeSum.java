@@ -39,18 +39,48 @@ package leetcode.editor.cn;
 // Related Topics 数组 双指针 排序 👍 4656 👎 0
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class ThreeSum{
-         public static void main(String[] args) {
+         public static void main(String[] args) throws InterruptedException {
             Solution solution = new ThreeSum().new Solution();
- }
+
+             Thread thread = new Thread(() -> {
+                 try {
+                     TimeUnit.SECONDS.sleep(30);
+                 } catch (InterruptedException e) {
+
+
+                 }
+             });
+             thread.join();
+             System.out.println(1);
+
+
+             //使用单例线程池 保证线程有序执行
+             ExecutorService executorService = Executors.newSingleThreadExecutor();
+             for (int i = 0; i < 4; i++) {
+                 int finalI = i;
+                 executorService.submit(()->{
+                     //读取数据的逻辑
+                     System.out.println(finalI);
+                 });
+
+             }
+
+             executorService.shutdown();
+         }
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         int length = nums.length;
+        Arrays.sort(nums);
         List<List<Integer>> list=new ArrayList<>();
 
         for (int i = 1; i < length; i++) {

@@ -59,6 +59,13 @@ public class CoinChange2 {
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
+
+    /**
+     * dp  前置条件 f(k) k>=0
+     *k
+     * 组合要先遍历硬币
+     * 排列要先遍历金额
+     */
     class Solution {
         public int change(int amount, int[] coins) {
             int[] dp = new int[amount + 1];
@@ -70,7 +77,21 @@ public class CoinChange2 {
             }
             return dp[amount];
         }
+
+        public int chang(int amount) {
+            int[]  dp=new int[amount+1];
+            dp[0]=0;
+            dp[1]=1;
+            for (int i = 2; i < amount+1; i++) {
+                dp[i]=dp[i-1]+dp[i-2];
+            }
+            return dp[amount];
+
+        }
     }
+
+
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
