@@ -2,11 +2,6 @@ package beibao;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * @Author: chenwenshuo
@@ -18,12 +13,17 @@ import java.util.stream.Collectors;
  **/
 public class OneZeroQu {
 
+    public static void main(String[] args) {
+        long currentTimeMillis = System.currentTimeMillis();
+        System.out.println(String.valueOf(currentTimeMillis).length());
+    }
     @Test
     public void test(){
-        int[] v=new int[]{1,2,3};
-        int[] w=new int[]{1,2,3};
-        int V=4;
+        int[] v=new int[]{1,2,3,6};
+        int[] w=new int[]{1,2,3,5};
+        int V=6;
         dp1(v,w,V);
+        dp2(v,w,V);
 
     }
 
@@ -58,7 +58,7 @@ public class OneZeroQu {
                         dp[0][j] = Math.max(dp[0][j - 1], w[i]);
                     }else {
                         if (j>=v[i]){
-                            dp[i][j]=Math.max(dp[i-1][j-1],dp[i-1][j-v[i]]+w[i]);
+                            dp[i][j]=Math.max(dp[i-1][j],dp[i-1][j-v[i]]+w[i]);
                         }
                     }
                 }else {
@@ -76,7 +76,39 @@ public class OneZeroQu {
 
     /**
      /* * 压缩为一维数组   dp[v] dp[i]表示装i时候的最大价值
-     * max(dp[i-1],dp[i-v[i]]+w[i])
+     要从后往前遍历 才能不重复取值（V--）
+     why:  正序会重复使用--》如 取第i个时候 如果正序取到 j 时候放入则 dp[j-v[i]]+w[i]
+     取到j+v[i]时候 还会 又会计算dp[j+v[i]-v[i]]+w[i]=dp[j]+w[i]重复取值
+
+     倒序：取到i时候如i=3 {1,2,3} {1,2,3}  j=5  则
+     推理过程：
+     i=0时候
+     dp[5]=max(dp[5-v[0]]+w[i],dp[5])=1;
+     dp[4]=max(dp[4-v[0]]+w[i],dp[4])=1;
+     dp[3]=max(dp[3-v[0]]+w[i],dp[3])=1;
+     dp[2]=max(dp[2-v[0]]+w[2],dp[2])=1;
+     dp[1]=max(dp[2-v[0]]+w[i],dp[2])=1;
+     dp[0]=0
+
+     i=1;(同 j就是不选当前值时候的最大值)
+     dp[5]=max(dp[5-v[1]]+w[1],dp[5])=dp[3]+2=3;
+     dp[4]=max(dp[4-v[1]]+w[1],dp[4)=dp[2]+2=3;
+     dp[3]=max(dp[3-v[1]]+w[1],dp[3])=dp[1]+2=3;
+     dp[2]=max(dp[2-v[1]]+w[1],dp[3])=dp[0]+2=2;
+     dp[1]=max(dp[1-v[1]+w[i],dp[3])=1(不符合j>=v[i]);
+     dp[0]=0
+
+     i=2:
+     dp[5]=max(dp[5-v[2]]+w[1],dp[5])=dp[2]+3=5;
+     dp[4]=max(dp[4-v[2]]+w[1],dp[4)=dp[1]+3=4;
+     dp[3]=max(dp[3-v[2]]+w[1],dp[3])=dp[0]+3=3;
+     dp[2]=max(dp[2-v[2]]+w[1],dp[2])=dp[2]=2;
+     dp[1]=max(dp[1-v[2]]+w[i],dp[1])=1(不符合j>=v[i]);
+     dp[0]=0
+
+
+     dp[5]=max(dp[5-1],dp[5-v[3]]+w[3])
+     * max(dp[j-1],dp[j-v[i]]+w[i])
      * @param v
      * @param w
      * @param V
@@ -88,7 +120,7 @@ public class OneZeroQu {
         dp1[0] = 0;
 
         for (int i = 0; i < v.length; i++) {
-            for (int j = 1; j < V + 1; j++) {
+            for (int j = V ; j >0; j--) {
                 if (j >= v[i]) {
                     dp1[j] = Math.max(dp1[j], dp1[j - v[i]] + w[i]);
                 }
