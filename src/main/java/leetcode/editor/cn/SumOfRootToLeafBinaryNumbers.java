@@ -42,6 +42,8 @@ public class SumOfRootToLeafBinaryNumbers{
             Solution solution = new SumOfRootToLeafBinaryNumbers().new Solution();
 
              System.out.println((0<<1)+1);
+             System.out.println((1<<1)+1);
+             System.out.println();
  }
 
 //leetcode submit region begin(Prohibit modification and deletion)
