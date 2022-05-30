@@ -56,6 +56,7 @@ public class CoinChange2 {
     public static void main(String[] args) {
         Solution solution = new CoinChange2().new Solution();
         System.out.println(solution.change(5, new int[]{1, 2, 5}));
+        System.out.println(solution.chang(5));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
