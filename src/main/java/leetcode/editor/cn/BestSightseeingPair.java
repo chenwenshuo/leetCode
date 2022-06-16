@@ -34,15 +34,36 @@ package leetcode.editor.cn;
 // 
 // Related Topics 数组 动态规划 👍 313 👎 0
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 public class BestSightseeingPair{
          public static void main(String[] args) {
             Solution solution = new BestSightseeingPair().new Solution();
+
+             Calendar calendar = Calendar.getInstance();
+             calendar.setTime(new Date());
+             int year = calendar.get(Calendar.YEAR);
+             int month = calendar.get(Calendar.MONTH) + 1;
+             System.out.println(month);
+             Map<Integer, Integer> MONTH_QUATER_MAPPING = new HashMap();
+             for (int i = 1; i < 13; i++) {
+                 MONTH_QUATER_MAPPING.put(i , ((i-1) / 3 + 1));
+
+             }
+             System.out.println(0);
  }
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int maxScoreSightseeingPair(int[] values) {
         //[8,1,5,2,6]
+        /**
+         * 前：mx 取开头的最大值
+         * ans 取qi
+         */
         int ans = 0, mx = values[0] + 0;
         for (int j = 1; j < values.length; ++j) {
             ans = Math.max(ans, mx + values[j] - j);
@@ -52,6 +73,8 @@ class Solution {
         return ans;
 
     }
+
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 

@@ -49,6 +49,12 @@ public class BeautifulArrangement{
 
             Solution solution = new BeautifulArrangement().new Solution();
              System.out.println(solution.countArrangement(5));
+
+
+             StringBuffer stringBuffer =new StringBuffer();
+             stringBuffer.append("<a");
+             System.out.println("<a");
+             System.out.println(stringBuffer.toString());
  }
 
 //leetcode submit region begin(Prohibit modification and deletion)
