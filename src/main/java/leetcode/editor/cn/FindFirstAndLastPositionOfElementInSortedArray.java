@@ -50,22 +50,7 @@ public class FindFirstAndLastPositionOfElementInSortedArray {
 class Solution {
     public int[] searchRange(int[] nums, int target) {
 
-        if (nums.length==0||nums[0]>target||nums[nums.length-1]<target) return new int[]{-1,-1};
-        int[] ans=new int[2];
-        int len = nums.length;
-        int a= 0;
-        int b=len-1;
-
-        while (a<=b){
-            if (nums[a]<target)
-                a++;
-            if (nums[b]>target)
-                b--;
-            if (nums[a]==target&&nums[b]==target){
-                return new int[]{a,b};
-            }
-        }
-            return  new int[]{-1,-1};
+        return nums;
     }
 
 }
