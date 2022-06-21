@@ -50,11 +50,14 @@ package leetcode.editor.cn;
 // 
 // Related Topics 数组 二分查找 排序 👍 66 👎 0
 
+import jdk.internal.org.objectweb.asm.TypeReference;
+
 import java.util.Arrays;
 
 public class SpecialArrayWithXElementsGreaterThanOrEqualX{
          public static void main(String[] args) {
             Solution solution = new SpecialArrayWithXElementsGreaterThanOrEqualX().new Solution();
+
  }
 
 //leetcode submit region begin(Prohibit modification and deletion)
@@ -65,19 +68,22 @@ class Solution {
             int l = 1, r = nums[n - 1];
             while (l <= r) {
                 int mid = l + r >> 1;
-                if (cnt(mid, nums) == mid) return mid;
-                else if (cnt(mid, nums) < mid) r = mid - 1;
+                if (count(mid, nums) == mid)
+                    return mid;
+                else if (count(mid, nums) < mid)
+                    r = mid - 1;
                 else l = mid + 1;
             }
             return -1;
         }
 
-        public  int cnt(int a, int[] nums) {
+        public  int count(int a, int[] nums) {
             int n = nums.length;
             int l = 0, r = n - 1;
             while (l < r) {
                 int mid = l + r >> 1;
-                if (nums[mid] < a) l = mid + 1;
+                if (nums[mid] < a)
+                    l = mid + 1;
                 else r = mid;
             }
             return n - l;
