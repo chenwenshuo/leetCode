@@ -52,7 +52,11 @@ public class TwoSumIiInputArrayIsSorted{
  }
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+
+    /**
+     * 固定第一个数字 找第二个
+     */
+    class Solution {
     public int[] twoSum(int[] numbers, int target) {
         int a,b,c;
         for (int i = 0; i <numbers.length; i++) {
