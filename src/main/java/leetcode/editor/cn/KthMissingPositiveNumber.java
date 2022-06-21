@@ -50,6 +50,7 @@ public class KthMissingPositiveNumber{
 class Solution {
     public int findKthPositive(int[] arr, int k) {
 
+        if (arr[0]>k) return k;
         int l=0,r=arr.length;
         while (l<r){
             int mid=(l+r)>>1;
