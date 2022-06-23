@@ -31,6 +31,7 @@ public class ZuoXuanZhuanZiFuChuanLcof{
             Solution solution = new ZuoXuanZhuanZiFuChuanLcof().new Solution();
  }
 
+
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public String reverseLeftWords(String s, int n) {
