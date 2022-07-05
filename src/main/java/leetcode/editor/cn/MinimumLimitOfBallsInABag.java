@@ -63,6 +63,8 @@ package leetcode.editor.cn;
 public class MinimumLimitOfBallsInABag{
          public static void main(String[] args) {
             Solution solution = new MinimumLimitOfBallsInABag().new Solution();
+
+             System.out.println(solution.minimumSize1(new int[]{2,4,8,2},1));
  }
 
 //leetcode submit region begin(Prohibit modification and deletion)
@@ -93,7 +95,46 @@ class Solution {
         }
         return ans;
     }
+
+
+
+
+
+
+
+
+
+        public boolean check(int[] nums, long cost, int maxOperations) {
+            long ans = 0;
+            for(int cur : nums) {
+                if(cur % cost == 0) {
+                    ans += cur / cost - 1;
+                } else {
+                    ans += cur / cost;
+                }
+            }
+            return ans <= maxOperations;
+        }
+
+        public int minimumSize1(int[] nums, int maxOperations) {
+            long l = 1, r = 1000000000;
+            long ret = 0;
+            while(l <= r) {
+                long mid = (l + r) / 2;
+                if(check(nums, mid, maxOperations)) {
+                    r = mid - 1;
+                    ret = mid;
+                } else {
+                    l = mid + 1;
+                }
+            }
+            return (int)ret;
+        }
+
 }
+
+
+
 
 
 //leetcode submit region end(Prohibit modification and deletion)
