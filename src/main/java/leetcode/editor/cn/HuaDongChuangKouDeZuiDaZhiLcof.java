@@ -26,22 +26,12 @@ package leetcode.editor.cn;
 // 注意：本题与主站 239 题相同：https://leetcode-cn.com/problems/sliding-window-maximum/ 
 // Related Topics 队列 滑动窗口 单调队列 堆（优先队列） 👍 459 👎 0
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class HuaDongChuangKouDeZuiDaZhiLcof{
          public static void main(String[] args) {
-             /**
-              * [1,3,-1,-3,5,3,6,7]
-              * 3
-              */
-            Solution solution = new HuaDongChuangKouDeZuiDaZhiLcof().new Solution();
-             int[] ints = solution.maxSlidingWindow(new int[]{}, 3);
-             for (int anInt : ints) {
-                 System.out.println(anInt);
-             }
+
          }
 
 //leetcode submit region begin(Prohibit modification and deletion)
