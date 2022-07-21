@@ -28,13 +28,14 @@ import java.util.List;
 
 public class ZiFuChuanDePaiLieLcof{
          public static void main(String[] args) {
-             String s1 = new String("ABC");
-             String s2 = new String("ABC");
-             String s3 = "ABC";
-             System.out.println(s1 == s2);
-             System.out.println(s1.equals(s3));
-             System.out.println(s1.intern() == s3);
- }
+             Solution solution = new ZiFuChuanDePaiLieLcof().new Solution();
+             String[] abcs = solution.permutation("abc");
+             for (String abc : abcs) {
+                 System.out.println(abc);
+             }
+
+
+         }
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {

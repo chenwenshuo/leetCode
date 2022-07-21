@@ -20,11 +20,10 @@ public class OneZeroQu {
     @Test
     public void test(){
         int[] v=new int[]{1,2,3,6};
-        int[] w=new int[]{1,2,3,5};
+        int[] w=new int[]{1,2,3,6};
         int V=6;
         dp1(v,w,V);
         dp2(v,w,V);
-
     }
 
     /**=1
