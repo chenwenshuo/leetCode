@@ -51,6 +51,9 @@ public class BestTimeToBuyAndSellStockIi {
 class Solution {
     public int maxProfit(int[] prices) {
         int n = prices.length;
+        // dp0：持有现金
+        // dp1：持有股票
+        // 状态转移：dp0 → dp1 → dp0 → dp1 → dp0 → dp1 → dp0
         int dp0 = 0, dp1 = -prices[0];
         for (int i = 1; i < n; ++i) {
             int newDp0 = Math.max(dp0, dp1 + prices[i]);
