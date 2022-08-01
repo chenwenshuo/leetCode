@@ -72,6 +72,33 @@ public class ValidSudoku{
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+
+    public boolean isValidSudoku1(char[][] board) {
+        int[][] row=new int[9][9];
+        int[][] column=new int[9][9];
+        int[][][] matrix=new int[3][3][9];
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                char c = board[i][j];
+                if (c!='.'){
+                    int k = c - '1';
+                    if (row[i][k] == 1) {
+                        return false;
+                    } else if (column[j][k] == 1) {
+                        return false;
+                    } else if (matrix[i / 3][j / 3][k] == 1) {
+                        return false;
+                    }
+                    row[i][k]++;
+                    column[j][k]++;
+                    matrix[i / 3][j / 3][k]++;
+                }
+
+            }
+        }
+        return true;
+    }
+
     public boolean isValidSudoku(char[][] board) {
         int[][] row = new int[9][9];
         int[][] column = new int[9][9];
