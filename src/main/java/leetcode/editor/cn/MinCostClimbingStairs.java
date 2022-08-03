@@ -43,6 +43,8 @@ package leetcode.editor.cn;
 // 
 // Related Topics 数组 动态规划 👍 909 👎 0
 
+import java.util.Map;
+
 public class MinCostClimbingStairs{
          public static void main(String[] args) {
             Solution solution = new MinCostClimbingStairs().new Solution();
@@ -58,10 +60,10 @@ public class MinCostClimbingStairs{
     public int minCostClimbingStairs(int[] cost) {
         int length = cost.length;
         int[] dp=new int[length+1];
-        dp[0]=dp[1]=cost[0];
-        for (int i = 2; i < cost.length; i++) {
-            dp[i]=Math.max(dp[i-1]+cost[i-1],dp[i-2]+cost[i-2]);
-
+        dp[0]=0;
+        dp[1]=0;
+        for (int i = 2; i <= length; i++) {
+           dp[i]= Math.min(dp[i-1]+cost[i-1],dp[i-2]+cost[i-2]);
         }
 
         return dp[length];
