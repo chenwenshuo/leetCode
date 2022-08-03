@@ -45,6 +45,14 @@ package leetcode.editor.cn;
 //
 // Related Topics 深度优先搜索 广度优先搜索 并查集 数组 矩阵 👍 1831 👎 0
 
+/**
+ *思路：
+ * 1.dfs
+ * 从头遍历，类似于树 要遍历上下左右四个节点
+ * return 条件 边界值+不符合岛屿时候
+ * 符合条件加一
+ *
+ */
 public class NumberOfIslands{
          public static void main(String[] args) {
             Solution solution = new NumberOfIslands().new Solution();
