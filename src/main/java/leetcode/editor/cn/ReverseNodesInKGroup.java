@@ -44,7 +44,10 @@ package leetcode.editor.cn;
 
 public class ReverseNodesInKGroup{
          public static void main(String[] args) {
-            Solution solution = new ReverseNodesInKGroup().new Solution();
+
+
+             System.out.println("hello world");
+            
  }
 
 //leetcode submit region begin(Prohibit modification and deletion)
