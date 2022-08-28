@@ -66,13 +66,12 @@ class Solution {
         ListNode tem=head;
         ListNode pre=head;
 
-        int num=0;
+
         while (tem.next!=null){
             stack.push(tem);
             tem=tem.next;
-            num++;
         }
-        int c=num/2;
+        int c=(stack.size()-1)>>1;
         for (int i = 0; i < c; i++) {
             ListNode pop = stack.pop();
             pop.next=pre.next;
