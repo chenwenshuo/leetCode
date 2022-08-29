@@ -83,32 +83,35 @@ class Solution {
         Arrays.sort(nums);
         List<List<Integer>> list=new ArrayList<>();
 
-        for (int i = 1; i < length; i++) {
-            if (i!=0&&nums[i]==nums[i-1]) continue;
-
-            int one=-nums[i];
+        for (int i = 0; i < length; i++) {
+            if (i>0&&nums[i]==nums[i-1]) continue;
 
             int three=length-1;
+            int tag=-nums[i];
 
-            for (int j = i+1; j <length ; j++) {
-                if (j>i+1&&nums[j]==nums[j-1]) continue;
-                while (j<three&&nums[three]+nums[j]>one){
+            for (int two = i+1; two < nums.length; two++) {
+                if (two>i+1&&nums[two]==nums[two-1]) continue;
+
+                //已经排序
+                while (two < three && nums[two] + nums[three] > tag) {
                     --three;
                 }
+                if (two==three) break;
 
-                if (three==j) break;
-                if (nums[three]+nums[j]==one){
-                    List<Integer>  list1=new LinkedList<>();
-                    list1.add(i);
-                    list1.add(j);
-                    list1.add(three);
-                    list.add(list1);
-
+                if (nums[three]+nums[two]==tag){
+                   List<Integer> ans= new ArrayList<>();
+                   ans.add(nums[i]);
+                   ans.add(nums[two]);
+                   ans.add(nums[three] );
+                   list.add(ans);
                 }
 
             }
 
         }
+
+
+
         return list;
 
     }
