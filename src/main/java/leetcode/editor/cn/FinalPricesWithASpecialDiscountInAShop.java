@@ -63,25 +63,21 @@ public class FinalPricesWithASpecialDiscountInAShop {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        public int[] finalPrices2(int[] prices) {
+        public int[] finalPrices(int[] prices) {
 
             int[] ans = prices;
 
             Deque<Integer> stack = new LinkedList();
             for (int i = 0; i < prices.length; i++) {
-                stack = new LinkedList<>();
-                for (int j = i + 1; j < prices.length; j++) {
-                    stack.push(prices[j]);
-                    if (!stack.isEmpty() && stack.peek() <= prices[i]) {
-                        ans[i] -= stack.poll();
-                        break;
-                    }
+                while (!stack.isEmpty()&&prices[stack.peek()]>=prices[i]){
+                    ans[stack.poll()]-=prices[i];
                 }
+                stack.push(i);
             }
             return ans;
         }
 
-        public int[] finalPrices(int[] prices) {
+        public int[] finalPrices1(int[] prices) {
 
             int[] ans = prices;
 
