@@ -12,6 +12,37 @@ import org.junit.Test;
  * 求解将哪些物品装入背包，可使这些物品的总体积不超过背包容量，且总价值最大。输出最大价值。
  **/
 public class OneZeroQu {
+    public void dp3(int[] v, int[] w, int V) {
+        //装i件物品 使用j体积时候的最优解
+        int[][] dp=new int[v.length][V+1];
+
+        for (int i = 0; i < v.length; i++) {
+            for (int j = 0; j < V+1; j++) {
+                if (j>v[i]) {
+                    if (i == 0) {
+                        dp[0][j] = Math.max(w[i],dp[0][j-1] );
+                    }else {
+                        dp[i][j]=Math.max(dp[i-1][j],dp[i][j-v[i]]+w[i]);
+                    }
+                }else {
+                    dp[i][j]=dp[i-1][j];
+                }
+            }
+        }
+    }
+
+    public void dp4(int[] v, int[] w, int V) {
+        //体积为j时候的最优解
+        int[] dp=new int[V+1];
+        dp[0]=0;
+        for (int i = 0; i < v.length; i++) {
+            for (int j = V ; j >0; j--) {
+                if (j>=w[i]){
+                    dp[j]=Math.max(dp[j],dp[j-v[i]]+w[i]);
+                }
+            }
+        }
+    }
 
     public static void main(String[] args) {
         long currentTimeMillis = System.currentTimeMillis();
@@ -19,8 +50,8 @@ public class OneZeroQu {
     }
     @Test
     public void test(){
-        int[] v=new int[]{1,2,3,6};
-        int[] w=new int[]{1,2,3,6};
+        int[] v=new int[]{1};
+        int[] w=new int[]{1};
         int V=6;
         dp1(v,w,V);
         dp2(v,w,V);
@@ -86,7 +117,7 @@ public class OneZeroQu {
      dp[4]=max(dp[4-v[0]]+w[i],dp[4])=1;
      dp[3]=max(dp[3-v[0]]+w[i],dp[3])=1;
      dp[2]=max(dp[2-v[0]]+w[2],dp[2])=1;
-     dp[1]=max(dp[2-v[0]]+w[i],dp[2])=1;
+     dp[1]=max(dp[2-v[0]]+w[i],dp[1])=1;
      dp[0]=0
 
      i=1;(同 j就是不选当前值时候的最大值)

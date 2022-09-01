@@ -11,8 +11,8 @@ public class AllBagQu {
 
     @Test
     public void test(){
-        int[] v=new int[]{1,2,3,6};
-        int[] w=new int[]{2,5,3,100};
+        int[] v=new int[]{1};
+        int[] w=new int[]{1};
         int V=12;
         dp1(v,w,V);
         dp2(v,w,V);
