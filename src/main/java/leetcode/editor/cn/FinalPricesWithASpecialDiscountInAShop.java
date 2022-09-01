@@ -47,43 +47,60 @@ package leetcode.editor.cn;
 import java.util.Deque;
 import java.util.LinkedList;
 
-public class FinalPricesWithASpecialDiscountInAShop{
-         public static void main(String[] args) {
-            Solution solution = new FinalPricesWithASpecialDiscountInAShop().new Solution();
-             for (int i : solution.finalPrices(new int[]{8,7,4,2,8,1,7,7,10,1})) {
-                 System.out.print(i+"  ");
-             }
-
- }
-
-
- public static int aaa(int[] a){
-             return 1;
- }
-
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int[] finalPrices(int[] prices) {
-
-        int[] ans=prices;
-
-        Deque<Integer> stack=new LinkedList();
-        for (int i = 0; i < prices.length; i++) {
-            stack=new LinkedList<>();
-            for (int j = i+1; j < prices.length; j++) {
-                    stack.push(prices[j]);
-
-                if (!stack.isEmpty()&&stack.peek()<=prices[i]){
-                    ans[i]-=stack.poll();
-                    break;
-                }
-            }
+public class FinalPricesWithASpecialDiscountInAShop {
+    public static void main(String[] args) {
+        Solution solution = new FinalPricesWithASpecialDiscountInAShop().new Solution();
+        for (int i : solution.finalPrices(new int[]{8, 7, 4, 2, 8, 1, 7, 7, 10, 1})) {
+            System.out.print(i + "  ");
         }
 
-        return ans;
-
     }
-}
+
+
+    public static int aaa(int[] a) {
+        return 1;
+    }
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int[] finalPrices2(int[] prices) {
+
+            int[] ans = prices;
+
+            Deque<Integer> stack = new LinkedList();
+            for (int i = 0; i < prices.length; i++) {
+                stack = new LinkedList<>();
+                for (int j = i + 1; j < prices.length; j++) {
+                    stack.push(prices[j]);
+                    if (!stack.isEmpty() && stack.peek() <= prices[i]) {
+                        ans[i] -= stack.poll();
+                        break;
+                    }
+                }
+            }
+            return ans;
+        }
+
+        public int[] finalPrices(int[] prices) {
+
+            int[] ans = prices;
+
+            for (int i = 0; i < prices.length; i++) {
+
+                for (int j = i+1; j < prices.length; j++) {
+                    if (prices[j]<=prices[i]){
+                        ans[i]-=prices[j];
+                        break;
+                    }
+                }
+
+            }
+            return ans;
+        }
+    }
+
+
+
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
