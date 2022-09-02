@@ -35,12 +35,13 @@ package leetcode.editor.cn;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.List;
 
 public class PalindromeLinkedList{
          public static void main(String[] args) {
             Solution solution = new PalindromeLinkedList().new Solution();
-            ListNode listNode=new ListNode(1,new ListNode(2,new ListNode(2,new ListNode(1,null))));
-             System.out.println(solution.isPalindrome(listNode));
+            ListNode listNode=new ListNode(1,new ListNode(2,new ListNode(3,new ListNode(2,new ListNode(1,null)))));
+             System.out.println(solution.isPalindrome1(listNode));
          }
 
 //leetcode submit region begin(Prohibit modification and deletion)
@@ -54,6 +55,39 @@ public class PalindromeLinkedList{
       ListNode(int val, ListNode next) { this.val = val; this.next = next; }
   }
 class Solution {
+
+
+             //局部反转链表
+    public boolean isPalindrome1(ListNode head) {
+        if (head==null||head.next==null) return true;
+        ListNode low=head;
+        ListNode fast=head;
+        ListNode pre=null;
+        ListNode tem=null;
+        while (fast!=null&&fast.next!=null){
+            fast=fast.next.next;
+           tem=low.next;
+           low.next=pre;
+
+           pre=low;
+            low=tem;
+
+
+        }
+        if (fast!=null){
+            low=low.next;
+        }
+        while (pre!=null&&low!=null){
+            if (low.val!=pre.val)
+                return false;
+            pre=pre.next;
+            low=low.next;
+        }
+
+
+        return true;
+
+    }
              //使用栈
     public boolean isPalindrome(ListNode head) {
         if (head==null||head.next==null) return true;
