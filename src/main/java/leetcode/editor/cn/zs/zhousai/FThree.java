@@ -2,11 +2,16 @@ package leetcode.editor.cn.zs.zhousai;
 
 import org.junit.Test;
 
+import javax.crypto.spec.PSource;
+
 /**
  * @Author: chenwenshuo
  * @Date: 2022/09/04/11:29
  */
 public class FThree {
+    public static void main(String[] args) {
+        System.out.println(115240098147770004L%32);
+    }
 
     @Test
     public void test(){
