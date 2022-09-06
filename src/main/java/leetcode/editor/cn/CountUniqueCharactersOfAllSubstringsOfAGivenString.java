@@ -72,6 +72,9 @@ public class CountUniqueCharactersOfAllSubstringsOfAGivenString{
      *
      * 预处理 l 和 r 只需要使用遍历计数即可
      *
+     *
+     * 比如 abcde   c->abc cdf  a:3 b:3 c:3
+     *
      */
     class Solution {
     public int uniqueLetterString(String s) {
