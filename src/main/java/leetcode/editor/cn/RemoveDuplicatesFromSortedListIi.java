@@ -49,34 +49,29 @@ public class RemoveDuplicatesFromSortedListIi{
       ListNode(int val) { this.val = val; }
       ListNode(int val, ListNode next) { this.val = val; this.next = next; }
   }
-class Solution {
-    public ListNode deleteDuplicates(ListNode head) {
-        ListNode listNode = new ListNode(0, head);
-        ListNode ans=listNode;
-        /**
-         *0--> 1->2>2>2>3>3>4
-         * ans  1->2>2>2>3>3>4
-         *     1>2>2>3>3>4
-         *      1>2>3>3>4
-         *      1>3>3>4
-         *      1>3>4
-         *      1>4
-         *
-         */
-        while (ans.next!=null&&ans.next.next!=null){
-            if (ans.next.val==ans.next.next.val){
-                int x=ans.next.val;
-                while (ans.next!=null&&ans.next.val==x){
-                    ans.next=ans.next.next;
-                }
-            }else {
-                ans=ans.next;
-            }
+    class Solution {
+        public ListNode deleteDuplicates(ListNode head) {
+            /**
+             * 1.ans 头
+             * 2.tem作为ans指针移动
+             * 3.遍历head 相等直接跳过  不等于 做为tem的结尾连接
+             */
+            ListNode ans = new ListNode();
+            ListNode tem = ans;
+            while (head != null) {
 
+                if (head.next == null || head.val != head.next.val) {
+                    tem.next = head;
+                    tem = head;
+                }
+                while (head.next != null && head.val == head.next.val) head = head.next;
+                head = head.next;
+            }
+            tem.next = null;
+            return ans.next;
         }
-        return listNode.next;
     }
-}
+
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
