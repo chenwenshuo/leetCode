@@ -50,7 +50,13 @@ public class Hot19 {
           ListNode(int val) { this.val = val; }
           ListNode(int val, ListNode next) { this.val = val; this.next = next; }
       }
-     
+
+    /**
+     * 快慢指针
+     * @param head
+     * @param n
+     * @return
+     */
     public ListNode removeNthFromEnd(ListNode head, int n) {
 
           if (head==null) return head;
