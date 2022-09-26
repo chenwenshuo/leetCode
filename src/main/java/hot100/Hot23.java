@@ -77,7 +77,7 @@ public class Hot23 {
         }
         if(l1!=null){
             pre.next=l1;
-            ;
+
         }
         if(l2!=null){
             pre.next=l2;
