@@ -51,7 +51,6 @@ public class Hot23 {
         int mid=(l+r)/2;
         if (l==r)
             return lists[l];
-        ListNode listNode=lists[l];
 
         ListNode listNode1 = merge1(lists, l, mid);
         ListNode listNode2 = merge1(lists, mid+1, r);
