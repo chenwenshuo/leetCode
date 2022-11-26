@@ -1,34 +1,65 @@
 package hot100;
 
+import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
+
 public class Hot114 {
-   
-    //  Definition for a binary tree node.
-      public class TreeNode {
-          int val;
-          TreeNode left;
-          TreeNode right;
-          TreeNode() {}
-          TreeNode(int val) { this.val = val; }
-          TreeNode(int val, TreeNode left, TreeNode right) {
-              this.val = val;
-              this.left = left;
-              this.right = right;
-          }
-      }
-    public void flatten(TreeNode root) {
-          if (root==null) return;
+    public static class MultiThread {
 
-          while (root!=null){
-              
-          }
+       volatile int num = 0;
 
-    }
+        public static void main(String[] args) throws InterruptedException {
+            MultiThread multiThread = new MultiThread();
 
-    private void dfs(TreeNode left, TreeNode treeNode) {
-          if (left==null) return;
-        treeNode.right=left;
-        treeNode.left=null;
-        dfs(left.left,treeNode);
-        dfs(left.right,treeNode);
+            Thread t1 = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for (int i = 0; i < 10000; i++) {
+                        multiThread.method1();
+                    }
+                }
+            });
+            Thread t2 = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for (int i = 0; i < 10000; i++) {
+                        multiThread.method2();
+                    }
+                }
+            });
+
+            Thread t3 = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for (int i = 0; i < 10000; i++) {
+                        multiThread.method3();
+                    }
+                }
+            });
+
+            t1.start();
+            t2.start();
+            t3.start();
+
+            TimeUnit.SECONDS.sleep(10);
+            System.out.println(multiThread.num);
+        }
+
+        synchronized void method1() {
+            num++;
+        }
+
+        void method2() {
+            synchronized (this) {
+                num++;
+                //System.out.println(num);
+            }
+        }
+
+        void method3() {
+            synchronized (MultiThread.class) {
+                num++;
+            }
+        }
     }
 }
