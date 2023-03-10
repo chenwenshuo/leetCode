@@ -44,6 +44,7 @@ public class BianryNumberToStringLcci{
 //力扣代码
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+		 // bwwb
 
 
 		public String  printBin(double num) {
