@@ -71,7 +71,7 @@ public class P1326_MinimumNumberOfTapsToOpenToWaterAGarden {
 
         public int minTaps(int n, int[] ranges) {
             int l=n+1;
-            var db = new int[l][l];
+            int[][] db = new int[l][l];
             for (int i = 0; i < ranges.length; i++) {
                 for (int i1 = 0; i1 < ranges.length; i1++) {
                     db[i][i1] = i1-i+1;
