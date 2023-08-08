@@ -52,27 +52,60 @@
 
 package leetcode.editor.cn;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import javax.swing.plaf.IconUIResource;
 
 /**
  * 三数之和
+ *
  * @author chenws
  * @date 2023-02-20 15:56:37
  */
-public class P15_ThreeSum{
-	 public static void main(String[] args) {
-	 	 //测试代码
-	 	 Solution solution = new P15_ThreeSum().new Solution();
-	 }
-	 
-//力扣代码
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public List<List<Integer>> threeSum(int[] nums) {
-			return null;
+public class P15_ThreeSum {
 
+    public static void main(String[] args) {
+        //测试代码
+        Solution solution = new P15_ThreeSum().new Solution();
     }
-}
-//leetcode submit region end(Prohibit modification and deletion)
+
+    //力扣代码
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+
+        public List<List<Integer>> threeSum(int[] nums) {
+            Arrays.sort(nums);
+            List<List<Integer>> ans = new ArrayList<>();
+            for (int i = 0; i < nums.length; i++) {
+                if (i != 0 && nums[i] == nums[i - 1]) {
+                    continue;
+                }
+                List<Integer> tem = new ArrayList<>();
+                int target = nums[i];
+                int two = i + 1;
+                int three = nums.length - 1;
+                for (int j = two; j < nums.length; j++) {
+                    if (j != two && nums[j] == nums[j - 1]) {
+                        continue;
+                    }
+                    while (three > j && nums[j] + nums[three] >= target) {
+                        if (nums[j] + nums[three] == target) {
+                            tem.add(nums[i]);
+                            tem.add(nums[j]);
+                            tem.add(nums[three]);
+                            ans.add(tem);
+                        }else {
+                            three--;
+                        }
+                    }
+                }
+
+            }
+            return ans;
+
+        }
+    }
+    //leetcode submit region end(Prohibit modification and deletion)
 
 }

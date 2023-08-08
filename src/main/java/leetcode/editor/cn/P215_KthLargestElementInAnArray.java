@@ -33,7 +33,6 @@
 
 package leetcode.editor.cn;
 
-import com.sun.jmx.remote.internal.ArrayQueue;
 import java.util.PriorityQueue;
 
 /**
