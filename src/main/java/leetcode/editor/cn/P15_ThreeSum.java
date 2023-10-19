@@ -54,7 +54,11 @@ package leetcode.editor.cn;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import javax.swing.plaf.IconUIResource;
 
 /**
@@ -68,6 +72,10 @@ public class P15_ThreeSum {
     public static void main(String[] args) {
         //测试代码
         Solution solution = new P15_ThreeSum().new Solution();
+
+        Map<Integer, Set<Integer>> map = new HashMap<>();
+        map.computeIfAbsent(3,v->new HashSet<>()).add(2);
+
     }
 
     //力扣代码
@@ -95,11 +103,52 @@ public class P15_ThreeSum {
                             tem.add(nums[j]);
                             tem.add(nums[three]);
                             ans.add(tem);
-                        }else {
+                        } else {
                             three--;
                         }
                     }
                 }
+
+            }
+            return ans;
+
+        }
+
+        public List<List<Integer>> threeSum1(int[] nums) {
+            Arrays.sort(nums);
+            List<List<Integer>> ans = new ArrayList<>();
+            for (int i = 0; i < nums.length - 2; i++) {
+                if (i != 0 && nums[i] == nums[i - 1]) {
+                    continue;
+                }
+                List<Integer> tem = new ArrayList<>();
+
+                int f = nums[i];
+
+                int t = Integer.MAX_VALUE;
+
+                for (int l = f + 1, r = nums.length - 1; l < r; ) {
+                    int number = nums[l];
+                    int number1 = nums[r];
+                    if (nums[f] != t && number1 + number == -f) {
+                        t = nums[l];
+                        tem.add(nums[i]);
+                        tem.add(nums[l]);
+                        tem.add(nums[r]);
+                        ans.add(tem);
+                        continue;
+                    }
+                    if (nums[f] == t) {
+                        l++;
+                        continue;
+                    }
+                    if (number1 + number > -f) {
+                        r--;
+                        continue;
+                    }
+                    l++;
+                }
+
 
             }
             return ans;
