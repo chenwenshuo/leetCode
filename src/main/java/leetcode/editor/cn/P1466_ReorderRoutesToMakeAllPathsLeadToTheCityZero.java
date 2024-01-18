@@ -50,11 +50,7 @@
 
 package leetcode.editor.cn;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * 重新规划路线
@@ -73,36 +69,70 @@ public class P1466_ReorderRoutesToMakeAllPathsLeadToTheCityZero{
 	class Solution {
 
 		public int minReorder(int n, int[][] connections) {
-			List<Integer>[] adjacentArr = new List[n];
-			for (int i = 0; i < n; i++) {
-				adjacentArr[i] = new ArrayList<Integer>();
-			}
+			List<Integer>[] g = new List[n];
+			Arrays.setAll(g, k -> new ArrayList<>());
+
 			for (int[] connection : connections) {
-				adjacentArr[connection[0]].add(connection[1]);
-				adjacentArr[connection[1]].add(connection[0]);
+				g[connection[0]].add(connection[1]);
+				g[connection[1]].add(connection[0]);
 			}
-			int[] levels = new int[n];
-			Arrays.fill(levels, -1);
-			levels[0] = 0;
-			Queue<Integer> queue = new ArrayDeque<Integer>();
+
+			int ans = 0;
+			int[] l = new int[n];
+			Arrays.fill(l,-1);
+			l[0]=0;
+			Queue<Integer> queue = new LinkedList<>();
 			queue.offer(0);
-			while (!queue.isEmpty()) {
-				int city = queue.poll();
-				List<Integer> adjacent = adjacentArr[city];
-				for (int next : adjacent) {
-					if (levels[next] < 0) {
-						levels[next] = levels[city] + 1;
-						queue.offer(next);
+			while (!queue.isEmpty()){
+				Integer poll = queue.poll();
+				List<Integer> list = g[poll];
+				for (Integer x : list) {
+					if (l[x]==-1){
+						l[x]=l[poll]+1;
+						queue.offer(x);
 					}
 				}
 			}
-			int reorder = 0;
+
 			for (int[] connection : connections) {
-				if (levels[connection[0]] < levels[connection[1]]) {
-					reorder++;
+				if (l[connection[0]] < l[connection[1]]) {
+					ans++;
 				}
 			}
-			return reorder;
+			return ans;
+		}
+	}
+
+	public int minReorder(int n, int[][] connections) {
+		List<Integer>[] g = new List[n];
+		Arrays.setAll(g, k -> new ArrayList<>());
+
+		for (int[] connection : connections) {
+			g[connection[0]].add(connection[1]);
+			g[connection[1]].add(connection[0]);
+		}
+
+		int ans = 0;
+		int[] le = new int[n];
+		Arrays.fill(le,-1);
+		le[0]=0;
+		dfs(0,le,g);
+		for (int[] connection : connections) {
+			if (le[connection[0]]<le[connection[1]]){
+				ans++;
+			}
+		}
+		return ans;
+	}
+
+	private void dfs(int k, int[] le, List<Integer>[] g) {
+		List<Integer> list = g[k];
+		for (Integer next : list) {
+			if (le[next]<0){
+				le[next]=le[k]+1;
+				dfs(next,le,g);
+
+			}
 		}
 	}
 }

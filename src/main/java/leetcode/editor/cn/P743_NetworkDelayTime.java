@@ -52,9 +52,6 @@ package leetcode.editor.cn;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
@@ -116,6 +113,27 @@ public class P743_NetworkDelayTime {
 
             return asInt == Integer.MAX_VALUE ? -1 : asInt;
         }
+
+
+        public int networkDelayTime1(int[][] times, int n, int k) {
+            int[] tem = new int[n + 1];
+            Arrays.fill(tem, Integer.MAX_VALUE);
+            boolean vst[] = new boolean[n + 1];
+            Set[] g = new Set[n + 1];
+            Arrays.setAll(g, j -> new ArrayList<int[]>());
+            for (int[] time : times) {
+                g[time[0]].add(new int[]{time[1], time[2]});
+            }
+            int asInt = 0;
+            for (int i : tem) {
+                asInt = Math.max(asInt, i);
+            }
+
+            return asInt == Integer.MAX_VALUE ? -1 : asInt;
+        }
+
+
+
     }
     //leetcode submit region end(Prohibit modification and deletion)
 

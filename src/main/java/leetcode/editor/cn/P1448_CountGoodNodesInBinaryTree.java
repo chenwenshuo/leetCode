@@ -72,13 +72,13 @@ class Solution {
     public int goodNodes(TreeNode root) {
 		ans = 1;
 		dfs(root.left,root.val);
-			dfs(root.right,root.val);
+		dfs(root.right,root.val);
 		return ans;
     }
 
 	private void dfs(TreeNode node, int val) {
 			if (node==null) return;
-			if (node.val>val){
+			if (node.val>=val){
 				ans++;
 				dfs(node.left,node.val);
 				dfs(node.right,node.val);

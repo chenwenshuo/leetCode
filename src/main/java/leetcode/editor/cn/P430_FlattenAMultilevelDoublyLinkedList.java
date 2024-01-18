@@ -122,28 +122,6 @@ public class P430_FlattenAMultilevelDoublyLinkedList {
 
     class Solution {
 
-        public Node flatten(Node head) {
-            Node dummy = new Node();
-            dummy.next = head;
-            for (; head != null; head = head.next) {
-                if (head.child != null) {
-                    Node tmp = head.next;
-                    Node child = head.child;
-                    head.next = child;
-                    child.prev = head;
-                    head.child = null;
-                    Node last = head;
-									while (last.next != null) {
-										last = last.next;
-									}
-                    last.next = tmp;
-									if (tmp != null) {
-										tmp.prev = last;
-									}
-                }
-            }
-            return dummy.next;
-        }
 
 
         public Node flatten1(Node head) {
