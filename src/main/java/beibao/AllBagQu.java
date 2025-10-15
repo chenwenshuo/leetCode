@@ -9,6 +9,9 @@ import org.junit.Test;
  */
 public class AllBagQu {
 
+    public static void main(String[] args) {
+        System.out.println(4&(-4));
+    }
     @Test
     public void test(){
         int[] v=new int[]{1};

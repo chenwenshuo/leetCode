@@ -43,8 +43,8 @@
 
 package leetcode.editor.cn;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 计算右侧小于当前元素的个数
@@ -61,8 +61,59 @@ public class P315_CountOfSmallerNumbersAfterSelf{
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public List<Integer> countSmaller(int[] nums) {
-			int x = Arrays.stream(nums).max().getAsInt();
-			return null;
+		//离散化
+		int[] clone = nums.clone();
+		int[] array = Arrays.stream(clone).distinct().sorted().toArray();
+		Map<Integer,Integer> map = new HashMap<>();
+		//  5 2 1 8 3
+		//
+
+		//--->
+		//排序放入map  则右边比他小数据就变成 排序后下标为i时候， 下标<i的所有数字个数
+		for (int i = 0; i < array.length; i++) {
+			map.put(array[i],i+1);
+		}
+		FenwickTree fenwickTree = new FenwickTree(nums.length+1);
+		
+		List<Integer> ans = new ArrayList<>();
+
+		for (int i = nums.length - 1; i >= 0; i--) {
+			Integer a = map.get(nums[i]);
+			int query = fenwickTree.query(a-1);
+			ans.add(query);
+			fenwickTree.update(a,1);
+		}
+		Collections.reverse(ans);
+		return ans;
+		}
+
+		class FenwickTree{
+		   private int[] tree;
+		   private int n;
+
+		   public FenwickTree(int n){
+			   tree = new int[n];
+			   this.n=n;
+		   }
+		   private int lowBit(int i){
+			   return i&(-i);
+		   }
+		   public void update(int index,int value){
+			   while (index<n){
+				   tree[index]+=value;
+				   index+=lowBit(index);
+			   }
+		   }
+
+		   public int query(int index){
+			   int sum = 0;
+			   while (index>0){
+				   sum+=tree[index];
+				   index-=lowBit(index);
+			   }
+			   return sum;
+		   }
+
 		}
 }
 //leetcode submit region end(Prohibit modification and deletion)

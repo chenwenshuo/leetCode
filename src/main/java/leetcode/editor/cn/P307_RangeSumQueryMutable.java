@@ -59,9 +59,63 @@ package leetcode.editor.cn;
 public class P307_RangeSumQueryMutable {
 
     public static void main(String[] args) {
+        P307_RangeSumQueryMutable p307RangeSumQueryMutable = new P307_RangeSumQueryMutable();
         //测试代码
+        NumArray0 numArray0 = new P307_RangeSumQueryMutable.NumArray0(new int[]{1, 3, 5});
+        System.out.println(numArray0.sumRange(0, 2));
+        numArray0.update(1, 2);
+        System.out.println(numArray0.sumRange(0, 2));
 
     }
+
+    static class NumArray0 {
+
+        private int[] nums;
+        private int[] tree;
+        int n;
+
+        public NumArray0(int[] nums) {
+            this.nums = nums;
+            this.n = nums.length + 1;
+            this.tree = new int[n];
+
+            for (int i = 0; i < nums.length; i++) {
+                update1(i + 1, nums[i]);
+            }
+        }
+
+        private int lowBit(int i) {
+            return i & (-i);
+        }
+
+        public void update(int index, int val) {
+            int t = val - nums[index];
+            nums[index] = val;
+            update1(index + 1, t);
+
+        }
+
+        public void update1(int i, int delta) {
+            while (i < n) {
+                tree[i] += delta;
+                i += lowBit(i);
+            }
+        }
+
+        public int query(int i) {
+            int sum = 0;
+            while (i > 0) {
+                sum += tree[i];
+                i -= lowBit(i);
+            }
+            return sum;
+        }
+
+        public int sumRange(int left, int right) {
+            return query(right + 1) - query(left);
+        }
+    }
+
 
     //力扣代码
     //leetcode submit region begin(Prohibit modification and deletion)
